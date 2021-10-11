@@ -56,14 +56,12 @@ jobs:
           cp ../src/buildpack.yml .
           sudo chmod -R 777 .
 
-          cat laraboot.json
-
           laraboot task add nodejs --imageUri=gcr.io/paketo-buildpacks/nodejs --format=external && \
           laraboot task add @core/laravel-foundation-provider --format=file -vvv
 
           # For pack and extraction
-          laraboot task add @core/laraboot-hook-before-pack --format=file -vvv && \
-          laraboot task add @core/laraboot-packer --format=file -vvv && \
+          # laraboot task add @core/laraboot-hook-before-pack --format=file -vvv && \
+          # laraboot task add @core/laraboot-packer --format=file -vvv && \
 
           DEBUG=* laraboot build dev -vvv --pack-params default-process=task
           docker images
@@ -74,7 +72,10 @@ jobs:
           # Crane could be used here but only works with remote images
           # crane export jetstream-demo - | tar -tvf - | less
 
-          docker cp jetstream-demo:/layers/laraboot-buildpacks_laraboot-packer/laraboot/app.tar.gz app.tar.gz
+          docker save jetstream-demo > jetstream-demo.tar.gz
+          mkdir jetstream-container && tar -xf jetstream-demo.tar -C jetstream-container
+          tree -L 1 jetstream-container
+
 
       - name: Upload buildpacks
         uses: actions/upload-artifact@v2
