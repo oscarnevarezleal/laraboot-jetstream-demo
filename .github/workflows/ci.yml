@@ -42,51 +42,8 @@ jobs:
           AWS_REGION: us-east-1
           AWS_DEFAULT_REGION: us-east-1
         run: |
-
-          readonly PROJECT_NAME="jetstream-demo-${PHP_VERSION}"
-          readonly PROJECT_DESC="this"
-          readonly PROJECT_VERSION="0.1"
-          readonly PROJECT_HOME=$(pwd)
-
-          # Enable network communication with Docker socket.
-          sudo chmod 666 /var/run/docker.sock
-
-          laraboot new "${PROJECT_NAME}" --php-version="${PHP_VERSION}.*" || exit 125
-          cd $PROJECT_NAME
-          cp ../src/laraboot.json .
-          cp ../src/buildpack.yml .
-          sudo chmod -R 777 .
-
-          laraboot task add nodejs --imageUri=gcr.io/paketo-buildpacks/nodejs --format=external && \
-          laraboot task add @core/laravel-foundation-provider --format=file -vvv
-
-          # For pack and extraction
-          # laraboot task add @core/laraboot-hook-before-pack --format=file -vvv && \
-          # laraboot task add @core/laraboot-packer --format=file -vvv && \
-
-          laraboot build --pack-params default-process=task
-
-          # Copy necessary file
-          cp -R ../src/vercel-files/. ./
-
-          # Crane could be used here but only works with remote images
-          # crane export jetstream-demo - | tar -tvf - | less
-
-          # Save image as Tar files
-          docker save jetstream-demo > jetstream-demo.tar
-          mkdir jetstream-container && tar -xf jetstream-demo.tar -C jetstream-container
-          tree -L 1 jetstream-container
-
-          # Grab tar file from image
-          image_id=$(docker run -id jetstream-demo)
-          docker export $image_id > image-app.tar.gz
-          mkdir jetstream-app && tar -xf image-app.tar.gz -C jetstream-app
-          tree -L 1 jetstream-app
-          pushd jetstream-app/workspace
-          ls -ltah .
-          tar -czf ${PROJECT_HOME}/app.tar.gz .
-          ls -ltah ${PROJECT_HOME}/app.tar.gz
-          popd
+          chmod -R +x ./scripts
+          ./scripts/build.sh
 
       - name: Upload buildpacks
         uses: actions/upload-artifact@v2

@@ -7,17 +7,9 @@ tasks:
     command: |
       laraboot --version
       cd /workspace/laraboot-jetstream-demo/src
-      sudo chmod 666 /var/run/docker.sock
-      laraboot new app --php-version=8.0.* && cd app
-      cp ../laraboot.json .
-
-      laraboot config set config.app/name Demo -e APP_NAME -e APPNAME
-
-      laraboot task add @core/laravel-starterkit-buildpack --format=file -vvv
-
-      laraboot task add nodejs --imageUri=gcr.io/paketo-buildpacks/nodejs --format=external --prepend -vvv
-
-      laraboot build --pack-params default-process=task -vvv
+      chmod -R +x ./scripts
+      ./scripts/build.sh
+      cd jetstream-demo-8.0
       laraboot run --port=9000
 # Ports to expose on workspace startup
 ports:
