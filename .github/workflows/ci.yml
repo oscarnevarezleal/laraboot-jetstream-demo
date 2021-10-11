@@ -71,10 +71,10 @@ jobs:
           # Copy necessary file
           cp -R ../src/vercel-files/. ./
 
-          crane export jetstream-demo - | tar -tvf - | less
+          # Crane could be used here but only works with remote images
+          # crane export jetstream-demo - | tar -tvf - | less
 
-          image_id=$(docker run -id jetstream-demo})
-          docker cp $image_id:/layers/laraboot-buildpacks_laraboot-packer/laraboot/app.tar.gz app.tar.gz
+          docker cp jetstream-demo:/layers/laraboot-buildpacks_laraboot-packer/laraboot/app.tar.gz app.tar.gz
 
       - name: Upload buildpacks
         uses: actions/upload-artifact@v2
