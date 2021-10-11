@@ -84,7 +84,7 @@ jobs:
           tree -L 1 jetstream-app
           pushd jetstream-app/workspace
           ls -ltah .
-          tar -czf ../../app.tar.gz .
+          tar -czf ../../../app.tar.gz .
           popd
 
       - name: Upload buildpacks
