@@ -72,9 +72,12 @@ jobs:
           # Crane could be used here but only works with remote images
           # crane export jetstream-demo - | tar -tvf - | less
 
-          docker save jetstream-demo > jetstream-demo.tar.gz
+          docker save jetstream-demo > jetstream-demo.tar
           mkdir jetstream-container && tar -xf jetstream-demo.tar -C jetstream-container
           tree -L 1 jetstream-container
+          pushd jetstream-container
+          tar -cvf - workspace | gzip > ../app.tar.gz
+          popd
 
 
       - name: Upload buildpacks
@@ -89,7 +92,7 @@ jobs:
     needs: integration
     strategy:
       matrix:
-        php: [ "7.4" ]
+        php: [ "8.0" ]
     steps:
       - name: Extract Branch Name
         run: echo "BRANCH=$(echo ${GITHUB_REF##*/})" >> $GITHUB_ENV
