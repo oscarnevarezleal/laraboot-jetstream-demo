@@ -72,12 +72,14 @@ jobs:
           # Crane could be used here but only works with remote images
           # crane export jetstream-demo - | tar -tvf - | less
 
+          # Save image as Tar files
           docker save jetstream-demo > jetstream-demo.tar
           mkdir jetstream-container && tar -xf jetstream-demo.tar -C jetstream-container
           tree -L 1 jetstream-container
-          pushd jetstream-container
-          tar -cvf - workspace | gzip > ../app.tar.gz
-          popd
+
+          # Grab tar file from image
+          image_id=$(docker run -id jetstream-demo)
+          docker cp $image_id:/layers/laraboot-buildpacks_laraboot-packer/laraboot/app.tar.gz app.tar.gz
 
 
       - name: Upload buildpacks
