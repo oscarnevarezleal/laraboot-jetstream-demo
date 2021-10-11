@@ -5,8 +5,8 @@ tasks:
     openMode: tab-after
     init: npm i -g @laraboot-io/cli
     command: |
-      readonly PHP_VERSION="${PHP_VERSION:8.0}"
-      readonly PROJECT_NAME="jetstream-demo-${PHP_VERSION}"
+      readonly PHP_VERSION="8.0"
+      readonly PROJECT_NAME="jetstream-demo"
       readonly PROJECT_HOME=$(pwd)
 
       # Enable network communication with Docker socket.
