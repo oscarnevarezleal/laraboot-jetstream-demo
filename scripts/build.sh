@@ -16,8 +16,9 @@ cp ../src/buildpack.yml .
 
 sudo chmod -R 777 .
 
-laraboot task add nodejs --imageUri=gcr.io/paketo-buildpacks/nodejs --format=external && \
-laraboot task add @core/laravel-foundation-provider --format=file -vvv
+laraboot task add @core/laravel-foundation-provider --format=file -vvv &&
+  laraboot task add @core/laravel-starterkit-buildpack --format=file -vvv &&
+  laraboot task add nodejs --imageUri=gcr.io/paketo-buildpacks/nodejs --format=external
 
 laraboot build --pack-params default-process=task
 
@@ -26,7 +27,7 @@ cp -R ../src/vercel-files/. ./
 
 # Grab tar file from image
 image_id=$(docker run -id jetstream-demo)
-docker export $image_id > image-app.tar.gz
+docker export "$image_id" >image-app.tar.gz
 mkdir jetstream-app && tar -xf image-app.tar.gz -C jetstream-app
 tree -L 1 jetstream-app
 pushd jetstream-app/workspace || exit 3
