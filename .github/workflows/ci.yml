@@ -64,8 +64,7 @@ jobs:
           # laraboot task add @core/laraboot-hook-before-pack --format=file -vvv && \
           # laraboot task add @core/laraboot-packer --format=file -vvv && \
 
-          DEBUG=* laraboot build dev -vvv --pack-params default-process=task
-          docker images
+          laraboot build --pack-params default-process=task
 
           # Copy necessary file
           cp -R ../src/vercel-files/. ./
@@ -85,15 +84,15 @@ jobs:
           tree -L 1 jetstream-app
           pushd jetstream-app/workspace
           ls -ltah .
-          tar -czf ../../../app.tar.gz .
-          ls -ltah ../../../app.tar.gz
+          tar -czf ${PROJECT_HOME}/app.tar.gz .
+          ls -ltah ${PROJECT_HOME}/app.tar.gz
           popd
 
       - name: Upload buildpacks
         uses: actions/upload-artifact@v2
         with:
           name: app-php${{ matrix.php }}
-          path: jetstream-demo/${PROJECT_NAME}/app.tar.gz
+          path: ${PROJECT_HOME}/app.tar.gz
 
   release:
     name: Release
