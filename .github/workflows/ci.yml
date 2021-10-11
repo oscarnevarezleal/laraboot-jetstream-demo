@@ -56,6 +56,8 @@ jobs:
           cp ../src/buildpack.yml .
           sudo chmod -R 777 .
 
+          cat laraboot.json
+
           laraboot task add nodejs --imageUri=gcr.io/paketo-buildpacks/nodejs --format=external && \
           laraboot task add @core/laravel-foundation-provider --format=file -vvv
 
