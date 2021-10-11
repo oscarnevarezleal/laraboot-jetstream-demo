@@ -83,8 +83,9 @@ jobs:
           mkdir jetstream-app && tar -xf app.tar.gz -C jetstream-app
           tree -L 1 jetstream-app
           pushd jetstream-app/workspace
-          popd
+          ls -ltah ls layers/laraboot-buildpacks_laraboot-packer
           ls layers/laraboot-buildpacks_laraboot-packer/laraboot/app.tar.gz
+          popd
           # docker cp $image_id:/layers/laraboot-buildpacks_laraboot-packer/laraboot/app.tar.gz app.tar.gz
 
 
