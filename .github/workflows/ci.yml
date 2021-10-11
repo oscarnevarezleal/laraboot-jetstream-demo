@@ -93,7 +93,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: app-php${{ matrix.php }}
-          path: jetstream-demo/app.tar.gz
+          path: jetstream-demo/${PROJECT_NAME}/app.tar.gz
 
   release:
     name: Release
