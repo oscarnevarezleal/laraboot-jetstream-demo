@@ -46,6 +46,7 @@ jobs:
           readonly PROJECT_NAME="jetstream-demo-${PHP_VERSION}"
           readonly PROJECT_DESC="this"
           readonly PROJECT_VERSION="0.1"
+          readonly PROJECT_HOME=$(pwd)
 
           # Enable network communication with Docker socket.
           sudo chmod 666 /var/run/docker.sock
@@ -85,6 +86,7 @@ jobs:
           pushd jetstream-app/workspace
           ls -ltah .
           tar -czf ../../../app.tar.gz .
+          ls -ltah ../../../app.tar.gz
           popd
 
       - name: Upload buildpacks
