@@ -16,7 +16,6 @@ tasks:
       laraboot new "${PROJECT_NAME}" --php-version="${PHP_VERSION}.*" || exit 125
       cd $PROJECT_NAME || exit 126
 
-      cp ../laraboot.json .
       cp ../buildpack.yml .
 
       sudo chmod -R 777 .

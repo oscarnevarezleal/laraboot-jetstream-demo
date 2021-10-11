@@ -76,13 +76,7 @@
   },
   "Build": {
     "tasks": [
-      {
-        "name": "step-migration",
-        "path": "/workspace/laraboot-jetstream-demo/src/demo/.laraboot/tasks/step-migration",
-        "local": true,
-        "format": "custom",
-        "env": {}
-      }
+
     ]
   }
 }
