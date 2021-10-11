@@ -92,7 +92,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: app-php${{ matrix.php }}
-          path: ${PROJECT_HOME}/app.tar.gz
+          path: /home/runner/work/laraboot-jetstream-demo/laraboot-jetstream-demo/app.tar.gz
 
   release:
     name: Release
