@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
 
-readonly PROJECT_NAME="jetstream-demo-${PHP_VERSION:8.0}"
+readonly PHP_VERSION="${PHP_VERSION:8.0}"
+readonly PROJECT_NAME="jetstream-demo-${PHP_VERSION}"
 readonly PROJECT_HOME=$(pwd)
 
 # Enable network communication with Docker socket.
 sudo chmod 666 /var/run/docker.sock
 
-laraboot new "${PROJECT_NAME}" --php-version="${PHP_VERSION:8.0}.*" || exit 125
+laraboot new "${PROJECT_NAME}" --php-version="${PHP_VERSION}.*" || exit 125
 
 cd $PROJECT_NAME || exit 2
 
