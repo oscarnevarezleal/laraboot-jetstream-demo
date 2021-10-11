@@ -43,7 +43,7 @@ jobs:
           AWS_DEFAULT_REGION: us-east-1
         run: |
 
-          readonly PROJECT_NAME="app-${PHP_VERSION}"
+          readonly PROJECT_NAME="jetstream-demo-${PHP_VERSION}"
           readonly PROJECT_DESC="this"
           readonly PROJECT_VERSION="0.1"
 
@@ -71,9 +71,9 @@ jobs:
           # Copy necessary file
           cp -R ../src/vercel-files/. ./
 
-          crane export $PROJECT_NAME - | tar -tvf - | less
+          crane export jetstream-demo - | tar -tvf - | less
 
-          image_id=$(docker run -id $PROJECT_NAME})
+          image_id=$(docker run -id jetstream-demo})
           docker cp $image_id:/layers/laraboot-buildpacks_laraboot-packer/laraboot/app.tar.gz app.tar.gz
 
       - name: Upload buildpacks
