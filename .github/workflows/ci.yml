@@ -79,16 +79,13 @@ jobs:
 
           # Grab tar file from image
           image_id=$(docker run -id jetstream-demo)
-          docker export $image_id > app.tar.gz
-          mkdir jetstream-app && tar -xf app.tar.gz -C jetstream-app
+          docker export $image_id > image-app.tar.gz
+          mkdir jetstream-app && tar -xf image-app.tar.gz -C jetstream-app
           tree -L 1 jetstream-app
-          pushd jetstream-app
-          ls -ltah layers/
-          ls -ltah workspace/
-          # ls -ltah layers/laraboot-buildpacks_laraboot-packer
+          pushd jetstream-app/workspace
+          ls -ltah .
+          tar -czf ../../app.tar.gz .
           popd
-          # docker cp $image_id:/layers/laraboot-buildpacks_laraboot-packer/laraboot/app.tar.gz app.tar.gz
-
 
       - name: Upload buildpacks
         uses: actions/upload-artifact@v2
