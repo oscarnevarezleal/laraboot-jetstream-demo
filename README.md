@@ -2,7 +2,7 @@
 
 This project shows how to generate a Laravel application using Laraboot CLI.
 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://www.gitpod.io/#https://github.com/oscarnevarezleal/laraboot-jetstream-demo/tree/dev)
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://www.gitpod.io/#https://github.com/oscarnevarezleal/laraboot-jetstream-demo/tree/main)
 
 ## Features
 
