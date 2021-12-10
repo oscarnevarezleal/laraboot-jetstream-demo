@@ -24,7 +24,7 @@ tasks:
       laraboot task add @core/laravel-starterkit-buildpack --format=file -vvv && \
       laraboot task add nodejs --imageUri=gcr.io/paketo-buildpacks/nodejs --format=external
 
-      laraboot build --pack-params default-process=task
+      laraboot build --pack-params default-process=task --pack-params "env NODE_ENV=dev"
       laraboot run --port=9000
 # Ports to expose on workspace startup
 ports:
