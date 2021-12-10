@@ -20,7 +20,7 @@ laraboot task add @core/laravel-foundation-provider --format=file -vvv &&
   laraboot task add @core/laravel-starterkit-buildpack --format=file -vvv &&
   laraboot task add nodejs --imageUri=gcr.io/paketo-buildpacks/nodejs --format=external
 
-laraboot build --pack-params default-process=task
+laraboot build --pack-params default-process=task --pack-params "env NODE_ENV=dev"
 
 # Copy necessary file
 cp -R ../src/vercel-files/. ./
